@@ -55,7 +55,7 @@ export const fetchProducts = (category) => async (dispatch) => {
   dispatch(clearLoadMoreState());
   try {
     const response = await axios.get(
-      `http://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/${category}`
+      `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/products/${category}`
     );
     const data = response.data;
     return [dispatch(fetchProductSuccess(data))];
@@ -71,7 +71,7 @@ export const fetchAvailable = () => (dispatch) => {
   try {
     brands.forEach(async (brand) => {
       const response = await axios.get(
-        `http://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${brand}`
+        `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${brand}`
       );
       const data = response?.data?.response;
       allAvailable.push(data);

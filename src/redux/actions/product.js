@@ -64,25 +64,25 @@ export const fetchProducts = (category) => async (dispatch) => {
   }
 };
 
-export const fetchAvailable = () => (dispatch) => {
+export const fetchAvailable = () => async (dispatch) => {
   const brands = ['hennex', 'okkau', 'niksleh', 'abiplos', 'umpante', 'laion'];
   let allAvailable = [];
   dispatch(loadingStart());
   try {
-    brands.forEach(async (brand) => {
-      const response = await axios.get(
-        `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${brand}`
-      );
-      const data = response?.data?.response;
-      allAvailable.push(data);
+    await Promise.all(
+      brands.map(async (brand) => {
+        const response = await axios.get(
+          `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${brand}`
+        );
+        const data = response?.data?.response;
+        allAvailable.push(data);
+      })
+    );
 
-      return (
-        allAvailable.length > 5 && [
-          dispatch(fetchAvailableSuccess(allAvailable)),
-          dispatch(loadingEnd()),
-        ]
-      );
-    });
+    return [
+      dispatch(fetchAvailableSuccess(allAvailable)),
+      dispatch(loadingEnd()),
+    ];
   } catch (error) {
     return [dispatch(fetchError(error)), dispatch(loadingEnd())];
   }

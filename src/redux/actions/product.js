@@ -69,15 +69,15 @@ export const fetchAvailable = () => async (dispatch) => {
   let allAvailable = [];
   dispatch(loadingStart());
   try {
-    await Promise.all(
-      brands.map(async (brand) => {
-        const response = await axios.get(
-          `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${brand}`
-        );
-        const data = response?.data?.response;
-        allAvailable.push(data);
-      })
-    );
+    const fetchBrands = brands.map(async (brand) => {
+      const response = await axios.get(
+        `https://cors-anywhere.herokuapp.com/https://bad-api-assignment.reaktor.com/v2/availability/${brand}`
+      );
+      const data = response?.data?.response;
+      allAvailable.push(data);
+    });
+
+    await Promise.all(fetchBrands);
 
     return [
       dispatch(fetchAvailableSuccess(allAvailable)),

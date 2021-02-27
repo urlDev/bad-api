@@ -4,6 +4,44 @@ This is my solution to the for the assignment.
 
 ![Solution Home Page](https://i.paste.pics/deab51b72efacb93a4a89aad1781db7b.png)
 
+## Folder Structure
+```
+|-- App.css
+|-- App.jsx
+|-- components
+|   |-- error-fallback
+|   |   |-- ErrorFallback.jsx
+|   |   `-- ErrorFallback.styles.js
+|   |-- nav
+|   |   |-- Nav.jsx
+|   |   `-- Nav.styles.js
+|   `-- products-default
+|       |-- ProductsDefault.jsx
+|       `-- ProductsDefault.styles.js
+|-- index.css
+|-- index.js
+|-- redux
+|   |-- actions
+|   |   `-- product.js
+|   |-- reducers
+|   |   `-- product.js
+|   `-- store.js
+|-- setupTests.js
+`-- tests
+    |-- fixtures
+    |   `-- product.js
+    |-- redux
+    |   `-- actions
+    |       `-- product.test.js
+    `-- store.js
+```
+
+## Running Locally
+App is bootstrapped with create-react-app.
+
+`npm run start` to run the app locally and
+`npm run test` to run tests.
+
 ## Problems and Solutions
 
 ✅ **Having to do two different API calls to get products and their availability:** I wrote two async functions, one for fetching products and other for fetching availability data on array of brands. Second one had to loop through the array and fetch data for each brand.

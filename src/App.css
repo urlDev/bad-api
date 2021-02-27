@@ -1,0 +1,9 @@
+.App {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+code {
+  display: none;
+}
